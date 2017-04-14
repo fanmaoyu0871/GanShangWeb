@@ -6,6 +6,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from dss.Serializer import serializer  #序列化模块
 
 from .models import User
+from .models import Product_Category
+from .models import Product
+
+PAGE_SIZE = 20
 
 #{'code':200, 'data':{}, 'msg':'success'}
 
@@ -75,3 +79,30 @@ def changePassword(request):
 
 
 #-----***************************------------ Product  Module ------------***************************---------------------
+def categorys(request):
+    qs = Product_Category.objects.filter(parent_id=0)
+    response = {}
+
+    if(qs.exists()):
+        response['data'] = serializer(qs)
+        code_msg(response, 200, '获取分类成功')
+    else:
+        code_msg(response, 100, '分类不存在')
+
+    return HttpResponse(JsonResponse(response), content_type='application/json')
+
+def list_product(request, page):
+    category_id = request.POST['category_id']
+    response = {}
+
+    if(not category_id):
+        code_msg(response, 100, '参数错误：未传分类id')
+    else:
+        qs = Product_Category.objects.filter(parent_id = category_id)
+        li = [obj.pk for obj in qs]
+        qs = Product.objects.filter(category_id__in = li)[(int(page)-1)*PAGE_SIZE:int(page)*PAGE_SIZE]
+        response['data'] = serializer(qs)
+        code_msg(response, 200, '获取产品列表成功')
+
+    return HttpResponse(JsonResponse(response), content_type='application/json')
+
