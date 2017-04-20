@@ -1,0 +1,14 @@
+<!-- 页脚 -->
+<footer class="footer">
+	<div class="foot_about clear widthAuto">
+			<dl ng-repeat="xitem in footArray|limitTo:6">
+				<dt><a href="javascript:" ng-bind="xitem.title"></a></dt>
+				<dd ng-repeat="n in xitem.lists"><a href="{{n.href}}" ng-bind="n.name"></a></dd>
+			</dl>
+			<section class="foot_zxwm">
+				<span>0571-26262690</span>
+				<a href="tel:0571-26262690">24小时在线咨询电话<i class="telponsonIcon"></i></a>
+			</section>
+	</div>
+	<p class="widthFill paddingV10 foot_records">©xx.com 杭ICP证110xxx号 杭ICP备10046xxx号 杭州公网安<br>备11010802020134号 杭网文[2014]0059-0009号</p>
+</footer>

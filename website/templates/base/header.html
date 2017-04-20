@@ -1,0 +1,49 @@
+<header class="allHeader widthFill">
+	<!-- 顶部错做栏 -->
+	<section class="headertop">
+		<ul class="headerTopList widthAuto flexbox flex_justify_E">
+			<li>
+				<i></i>
+				<a href="javascript:">爽爽万岁</a>
+				<ul class="paddBottom10">
+					<li><a href="###">个人中心</a></li>
+					<li><a href="###">我的收藏</a></li>
+				</ul>
+			</li>
+			<li><a href="javascript:">消息通知</a></li>
+			<li><a href="javascript:">我的订单</a></li>
+			<li>
+				<i class="shop_cart_icon"></i>
+				<a href="javascript:">购物车(12)</a>
+			</li>
+		</ul>
+	</section>
+<!-- 导航,logo,搜索框栏 -->
+	<section class="navListBox widthAuto flexbox flex_justify_B flex_item_center">
+		<a href="#" class="shopLogo"><h1>
+			<img src="../static//image/logo.png" width="140" height="49" alt="logo敢尚商城">
+		</h1></a>
+		<nav>
+			<ul class="flexbox flex_justify_A flex_item_center clear">
+				<!-- 不管后台传多少 最多显示五个 -->
+				<li  ng-repeat="navitem in navdata|limitTo:5" ng-mouseover="mouseoverNavList(this);"><a href="javascript:" ng-bind="navitem.projectName"></a></li>
+				<!-- 以下三个是固定的 -->
+				<li><a href="#网点信息">网点信息</a></li>
+				<li><a href="#防伪查询">防伪查询</a></li>
+				<li><a href="#帮助中心">帮助中心</a></li>
+			</ul>
+		</nav>
+		<div class="searchBox flexbox flex_justify_S paddLeft5">
+			<i class="search_icon"></i>
+			<form action="#" method="post">
+				<input type="search" name="search" class="marginLeft5" id="searchForm"/>
+			</form>
+		</div>
+	</section>
+	<div class="navListContantList" ng-if="showFlag" ng-mouseleave="mouseleave()">
+	<!-- 在上面导航mouseoverNavList()的时候刷新此处数据-->
+		<ol class="widthAuto clear">
+			<li ng-repeat="data in resData"><a ng-href="{{data.productid}}" class="navListImg"><img class="transformScale" ng-src="{{data.img}}"></a><p>{{data.desc}}</p><span>￥{{data.price}}</span></li>
+		</ol>
+	</div>
+</header>

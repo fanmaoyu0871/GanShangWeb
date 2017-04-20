@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from Api import views
+from Api import views as api
 from DjangoUeditor import urls as DjangoUeditor_urls
+from website import views as Site_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v1/user/reg/$', views.reg),
-    url(r'^api/v1/user/login/$', views.login),
-    url(r'^api/v1/user/changePassword/$', views.changePassword),
+    url(r'^api/v1/user/reg/$', api.reg),
+    url(r'^api/v1/user/login/$', api.login),
+    url(r'^api/v1/user/changePassword/$', api.changePassword),
     url(r'^ueditor/', include(DjangoUeditor_urls)),
-    url(r'^api/v1/product/categorys/$', views.categorys),
-    url(r'^api/v1/product/list_product/(\d+)/$', views.list_product),
+    url(r'^api/v1/product/categorys/$', api.categorys),
+    url(r'^api/v1/product/list_product/(\d+)/$', api.list_product),
+    url(r'^$', Site_views.index),
 ]

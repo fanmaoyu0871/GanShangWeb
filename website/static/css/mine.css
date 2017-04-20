@@ -1,0 +1,248 @@
+/* CSS Document
+	xuxiang[jeesea]
+	2017-03-22
+	v1.0.01
+*/
+*{
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/*start css*/
+/*banana 导航 end*/
+.bananaSwitch li{
+	width: 288px;
+	height: 170px;
+	float: left;
+	margin-left: 16px;
+	-webkit-transition: -webkit-box-shadow 3s linear;
+    transition: box-shadow .3s linear;
+}
+.bananaSwitch li a{
+	overflow: hidden;
+}
+.bananaSwitch li:first-child{
+	margin-left: 0;
+}
+.bananaSwitch li:hover{
+	box-shadow: 0 6px 15px rgba(0,0,0,.3);
+	-webkit-box-shadow: 0 9px 20px rgba(0,0,0,.3);
+}
+/*首页优秀作品*/
+.ProjectTitle>h3{
+	font-size: 20px;
+  	font-weight: 500;
+  	letter-spacing: 0px;
+  	text-align: left;
+  	float: left;
+  	color: #4a4a4a;
+}
+.productNice{
+	overflow: hidden;
+	padding:0 15px;
+	margin: 0 -15px;
+}
+.productNice>ul{
+	padding-bottom: 20px;
+}
+.productNice li{
+	width: 267px;
+	float: left;
+	padding-top: 24px;
+	box-shadow: 0 10px 14px 0 #e0dde1;
+	-webkit-box-shadow: 0 10px 14px 0 #e0dde1;
+	-moz-box-shadow: 0 10px 14px 0 #e0dde1;
+	-ms-box-shadow: 0 10px 14px 0 #e0dde1;
+}
+
+.productNice li:not(:first-child){
+	margin-left: 44px;
+}
+.productNice li:nth-child(1n){
+	border-top: 1px solid #f5a623;
+}
+.productNice li:nth-child(1n) div.productNiceIntroduction h3{
+	background-color: #f5a623;
+	color: #ef9704;
+}
+.productNice li:nth-child(2n+2){
+	border-top: 1px solid #50e3c2;
+}
+.productNice li:nth-child(2n+2) div.productNiceIntroduction h3{
+	background-color: #50e3c2;
+	color: #04c197;
+}
+.productNice li:nth-child(3n+3){
+	border-top: 1px solid #4c91e3;
+}
+.productNice li:nth-child(3n+3) div.productNiceIntroduction h3{
+	background-color: #4c91e3;
+	color: #045abf;
+}
+.productNice li:nth-child(4n+4){
+	border-top: 1px solid #fc546a;
+}
+.productNice li:nth-child(4n+4) div.productNiceIntroduction h3{
+	background-color: #fc546a;
+	color: #d50b26;
+}
+.productNice li a{
+	width: 220px;
+	height: 220px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.productNiceIntroduction *{
+	width: 100%;
+	font-size: 14px;
+  	font-weight: 500;
+  	letter-spacing: 0px;
+  	text-align: center;
+  	color: #9b9b9b;
+  	padding: 5px 0;
+  	display: block;
+  	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.productNice li div.productNiceIntroduction h3{
+	font-size: 18px;
+	padding: 5px 0;
+}
+.productNice li div.productNiceIntroduction em{
+	padding: 2px 0;
+	color: #eb584c;
+}
+.switchWork{
+	float: right;
+	margin-top: 10px
+}
+.switchWork i{
+	width: 14px;
+	height: 14px;
+	border-top: 2px solid #4a4a4a;
+	border-right: 2px solid #4a4a4a;
+	cursor: pointer;
+}
+i.switchBtnRight{
+	-webkit-transform: rotate(45deg);
+  	transform: rotate(45deg);
+}
+i.switchBtnLeft{
+	-webkit-transform: rotate(-135deg);
+  	transform: rotate(-135deg);
+}
+/*首页产品*/
+.indexContain{
+	padding: 40px 0;
+	margin-top: 30px;
+	background-color: #f2f2f2;
+}
+.indexContain>ul>li:first-child .pro_Index_head{
+	padding:15px 0;
+	background-color: #2e7ed5;
+}
+.indexContain>ul>li:last-child .pro_Index_head{
+	padding:15px 0;
+	background-color: #e1495c;
+}
+.indexContain>ul>li:first-child{
+	margin-bottom: 30px;
+}
+.pro_Index_head>h3,.pro_Index_head>a{
+	position: relative;
+	font-size: 18px;
+  	font-weight: 400;
+  	letter-spacing: 0px;
+  	text-align: left;
+  	padding: 0 40px;
+  	color: #ffffff;
+  	float: left;
+}
+.pro_Index_head>a{
+	font-size: 14px;
+	float: right;
+}
+.pro_Index_head>a::after{
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 15px;
+	width: 16px;
+	height: 16px;
+	margin-top: -8px;
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAeUExURQAAAP///////////////////////////////////yR8m5UAAAAJdFJOUwDUtA1BbIEik6O3VwEAAADlSURBVCjPdVG9DoJADK4ioJvRQdk0TGyEJzgTY+LoyIYjG8YXcHBhPOIP97Zer+3B4re0/dKfry0A4rQ3qycMuBhEn0t8MIQ3x6ERpES0ntC5JKQ3YnZInK2jgswRHyQS61RQUErDLW3/TGomzqlg7uyXWrjilm1NxQ+I3GCpNT1AiZaGULuQxojKLnfJyhO6YUJK1jCjkszv5QTksisnaBFmW5Y8fcGnoTO9gHaQBLMECEaqcCopVrxShwea4vaRzLIIrDSd+INZFP7qG35MPexHiEm+Vv638dXGWzX6NsTHO/zBD5nzuQQf6LlUAAAAAElFTkSuQmCC") no-repeat center center;
+	background-size: 100% 100%;
+}
+.pro_Index_list{
+	margin-top: 4px;
+}
+.pro_Index_list_left{
+	width: 228px;
+	height: 616px;
+	float: left;
+}
+.pro_Index_list_right{
+	width: 957px;
+	float: right;
+}
+.pro_Index_list_right li{
+	position: relative;
+	width: 228px;
+	height: 300px;
+	float: left;
+	margin: 0 15px 15px 0;
+	background-color:white;
+}
+.pro_Index_list_right li:nth-child(4n){
+	margin-right: 0px;
+}
+.pro_Index_list_right li div.pro_Index_list_img{
+	width: 228px;
+	height: 207px;
+	text-align:center; 
+	line-height:207px; 
+	font-size:0; 
+	_font-size:205px;
+}
+.pro_Index_list_right li div.pro_Index_list_img img{
+	display:inline-block; 
+	vertical-align:middle; 
+	max-height:205px; 
+	max-width:226px;
+	_width:expression(this.width > 228 ? "228px" : this.width);
+	_height:expression(this.height>207?"207px":this.height);
+}
+.pro_Index_list_emsg{
+	height: 93px;
+	width: 100%;
+	padding-top: 5px;
+	overflow: hidden;
+}
+.pro_Index_list_emsg > *{
+	width: 98%;
+	font-size: 12px;
+  	font-weight: 300;
+  	letter-spacing: 0px;
+  	text-align: center;
+  	line-height: 14px;
+  	color: #9d9d9d;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: auto;
+    padding-top: 5px;
+}
+.indexContain>ul>li:first-child .pro_Index_list ul.pro_Index_list_right li div.pro_Index_list_emsg h3,.indexContain>ul>li:first-child .pro_Index_list ul.pro_Index_list_right li div.pro_Index_list_emsg em{
+	 color: #3280d5;
+}
+.indexContain>ul>li:last-child .pro_Index_list ul.pro_Index_list_right li div.pro_Index_list_emsg h3,.indexContain>ul>li:last-child .pro_Index_list ul.pro_Index_list_right li div.pro_Index_list_emsg em{
+	 color: #e1495c;
+}
+.indexContain>ul>li:first-child .pro_Index_list ul.pro_Index_list_right li div.pro_Index_list_emsg{
+	background-color: #ddebfa;
+}
+.indexContain>ul>li:last-child .pro_Index_list ul.pro_Index_list_right li div.pro_Index_list_emsg{
+	background-color: #fce0e2;
+}

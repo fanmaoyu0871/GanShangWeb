@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myweb">
+<head>
+    <meta charset="UTF-8">
+	<title>{% block title %} title {% endblock %}</title>
+    <script type="text/javascript" src="../../static/js/commed/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/css/headFoot.css">
+	{% block addcssjsblock %}{% endblock %}
+</head>
+<body ng-controller="init">
+		{% include 'base/header.html'%}
+
+		{% block content %}content{% endblock %}
+
+		{% include 'base/footer.html'%}
+</body>
+</html>

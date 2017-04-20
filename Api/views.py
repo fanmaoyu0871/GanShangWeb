@@ -11,7 +11,7 @@ from .models import Product
 
 PAGE_SIZE = 20
 
-#{'code':200, 'data':{}, 'msg':'success'}
+#返回响应格式：{'code':200, 'data':{}, 'msg':'success'}
 
 
 #-----***************************------------ User  Module ------------***************************---------------------
@@ -105,4 +105,3 @@ def list_product(request, page):
         code_msg(response, 200, '获取产品列表成功')
 
     return HttpResponse(JsonResponse(response), content_type='application/json')
-
