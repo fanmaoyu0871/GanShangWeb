@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from Api import views as api
 from DjangoUeditor import urls as DjangoUeditor_urls
 from website import views as Site_views
@@ -27,5 +29,11 @@ urlpatterns = [
     url(r'^ueditor/', include(DjangoUeditor_urls)),
     url(r'^api/v1/product/categorys/$', api.categorys),
     url(r'^api/v1/product/list_product/(\d+)/$', api.list_product),
+
     url(r'^$', Site_views.index),
+    url(r'^category/$', Site_views.category_view, name='category_view'),
+    url(r'^search/$', Site_views.search_list, name='search_list')
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

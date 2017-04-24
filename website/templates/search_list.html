@@ -1,0 +1,67 @@
+{% extends './base/base.html' %}
+{% block title %}分类结果{% endblock %}
+
+{% block addcssjsblock %}
+{% endblock %}
+
+{% block content %}
+    <!-- 搜索产品列表 -->
+<!-- <section class="widthFill" ng-controller="search"> -->
+<section class="widthFill searchListbox">
+	<!-- 搜索列表查询表头 -->
+	<section class="widthAuto paddingV5"><a href="javascript:">搜索：{{ condition }}</a></section>
+	<div class="searchListContain widthFill paddingV10">
+		<section class="widthAuto">
+			<span>您好，共为您找到{{ count }}件相关商品</span>
+			<div class="clear swichPrice marginTop10 paddingV10">
+				<label>价格：</label>
+				<input type="number" min="0" name="fastPrice" ng-model="minprice" placeholder="最小0元"/>
+				<i class="marginH10">——</i>
+				<input type="number" min="1" name="lastPrice" ng-model="maxprice" placeholder="最小1元"/>
+				<button ng-click="searchPost()">确定</button>
+			</div>
+		</section>
+	</div>
+	<!-- 搜索的产品信息 -->
+	<section class="widthAuto searchProject">
+		<ul class="widthFill clear projectList">
+            {% for product in product_list %}
+                <li class="transformtop">
+                    <a href="#" >
+                        <div class="pro_Index_list_img">
+                            <img src="/upload/{{ product.product_thumb}}" alt="{{ product.product_intro }}">
+                        </div>
+                        <div class="pro_Index_list_emsg">
+                            <h3>{{ product.product_name }}</h3>
+                            <p>{{ product.product_intro }}</p>
+                            <em>¥ {{ product.price }}</em>
+                            <span>总销量 : <em>{{ product.product_sum_sal }}</em></span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+		</ul>
+	</section>
+	<!-- 为您推荐 -->
+	<section class="recommend">
+		<span class="recommendTitle">为您推荐</span>
+		<section class="widthAuto searchProject">
+			<ul class="widthFill clear projectList">
+				<li class="transformtop" ng-repeat="proItem in recommendArray|limitTo:5" data-proid="{{proItem.id}}">
+					<a ng-href="{{proItem.Link}}" title="{{proItem.txt}}">
+						<div class="pro_Index_list_img">
+							<img ng-src="{{proItem.Img}}" alt="{{proItem.txt}}">
+						</div>
+						<div class="pro_Index_list_emsg">
+							<h3 ng-bind="proItem.title"></h3>
+							<p ng-bind="proItem.txt"></p>
+							<em ng-bind="proItem.price| currency:'￥'"></em>
+							<span>总销量 : <em ng-bind="proItem.volume"></em></span>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</section>
+	</section>
+</section>
+{% endblock %}

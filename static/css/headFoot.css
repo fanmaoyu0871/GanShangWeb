@@ -1,5 +1,5 @@
-/*@import url("reset.css");*/
-/* CSS Document
+@import url("reset.css");
+/* CSS Document 
 	xuxiang[jeesea]
 	2017-03-22
 	v1.0.01
@@ -229,7 +229,7 @@
 	float:left;
 	background:white;
 }
-#prevBtn,#nextBtn{
+#prevBtn,#nextBtn,#prevBtn_index{
 	position:absolute;
 	width: 40px;
 	height: 40px;
@@ -248,9 +248,19 @@
 	display: none;
 	/*background: rgba(255,255,255,.5);*/
 }
-#prevBtn{
+#prevBtn_index{
 	left: 245px;
 	transform: rotate(225deg);
+	-webkit-transform: rotate(225deg);
+	-moz-transform: rotate(225deg);
+	-ms-transform: rotate(225deg);
+}
+#prevBtn{
+	left: 15px;
+	transform: rotate(225deg);
+	-webkit-transform: rotate(225deg);
+	-moz-transform: rotate(225deg);
+	-ms-transform: rotate(225deg);
 }
 #nextBtn{
 	right: 15px;
@@ -349,7 +359,7 @@
 	border-left: solid 1px #f2f2f2;
 }
 .foot_about dl a,.foot_records{
-	font-family: .PingFangSC;
+	font-family: 'PingFangSC';
 	letter-spacing: 0px;
 	text-align: center;
 	color: #4a4a4a;
@@ -368,7 +378,7 @@
   	background-color: #fbf9f9;
 }
 .foot_about section.foot_zxwm *{
-	font-family: .PingFangSC;
+	font-family: 'PingFangSC';
   	letter-spacing: 1px;
   	text-align: center;
   	

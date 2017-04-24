@@ -21,12 +21,14 @@
 <!-- 导航,logo,搜索框栏 -->
 	<section class="navListBox widthAuto flexbox flex_justify_B flex_item_center">
 		<a href="#" class="shopLogo"><h1>
-			<img src="../static//image/logo.png" width="140" height="49" alt="logo敢尚商城">
+			<img src="../static/image/logo.png" width="140" height="49" alt="logo敢尚商城">
 		</h1></a>
 		<nav>
 			<ul class="flexbox flex_justify_A flex_item_center clear">
 				<!-- 不管后台传多少 最多显示五个 -->
-				<li  ng-repeat="navitem in navdata|limitTo:5" ng-mouseover="mouseoverNavList(this);"><a href="javascript:" ng-bind="navitem.projectName"></a></li>
+                {% for dict in product_list %}
+                    <li onmouseover="mouseOver(this)" data-index={{ dict.id }}><a href="">{{ dict.parent.category_name }}</a></li>
+                {% endfor %}
 				<!-- 以下三个是固定的 -->
 				<li><a href="#网点信息">网点信息</a></li>
 				<li><a href="#防伪查询">防伪查询</a></li>
@@ -35,15 +37,51 @@
 		</nav>
 		<div class="searchBox flexbox flex_justify_S paddLeft5">
 			<i class="search_icon"></i>
-			<form action="#" method="post">
+			<form target="_blank" action="{% url 'search_list' %}" method="get">
+                {% csrf_token %}
 				<input type="search" name="search" class="marginLeft5" id="searchForm"/>
 			</form>
 		</div>
 	</section>
-	<div class="navListContantList" ng-if="showFlag" ng-mouseleave="mouseleave()">
+	<div class="navListContantList" style="display: none" onmouseleave="mouseLeave(this)">
 	<!-- 在上面导航mouseoverNavList()的时候刷新此处数据-->
-		<ol class="widthAuto clear">
-			<li ng-repeat="data in resData"><a ng-href="{{data.productid}}" class="navListImg"><img class="transformScale" ng-src="{{data.img}}"></a><p>{{data.desc}}</p><span>￥{{data.price}}</span></li>
+		<ol id="showblock" class="widthAuto clear">
+
 		</ol>
 	</div>
+    <script>
+        function mouseLeave(target){
+            $('.navListContantList').css({'display':'none'});
+        }
+
+        function mouseOver(target){
+
+            $('.navListContantList').css({'display':'block'});
+
+            $('#showblock li').remove();
+
+            var target = target;
+            var index = parseInt(target.getAttribute('data-index'));
+
+            var product_list = {{ product_list_json | safe}};
+
+            for (var i = 0; i < product_list.length; i++) {
+                var product = product_list[i];
+                if (index == product.id) {
+                    if(product.child.length <= 0){
+                        $('.navListContantList').css({'display':'none'});
+                    }
+                    else{
+                        for(var j = 0; j < product.child.length; j++){
+                        var p = product.child[j];
+                        var img = '/upload/' + p.product_thumb;
+                        var node = '<li ><a href="#" class="navListImg"><img class="transformScale" src=' + img + '></a><p>' + p.product_name + '</p><span>￥' + p.price + '</span></li>'
+                        $('#showblock').append(node);
+                    }
+                    }
+                }
+            }
+
+        }
+    </script>
 </header>

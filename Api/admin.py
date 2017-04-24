@@ -3,10 +3,11 @@ from .models import Banner
 from .models import User
 from .models import Product_Category
 from .models import Product
+from .models import Advantise
 
 # Register your models here.
 class BannerAdmin(admin.ModelAdmin):
-    list_display = 'banner_image',
+    list_display = ('title', 'banner_image')
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('phone', 'username')
@@ -23,8 +24,12 @@ class Product_CategoryAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('product_name', 'category_id', 'product_type', 'price', 'real_price')
 
+class AdvantiseAdmin(admin.ModelAdmin):
+    list_display = ('title', 'ad_image')
+
 
 admin.site.register(Banner, BannerAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Product_Category, Product_CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Advantise, AdvantiseAdmin)

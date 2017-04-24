@@ -22,7 +22,8 @@ var myWeb = angular.module("myweb",[]);
 			console.error(res)
 		})
 		$scope.mouseoverNavList = function(e){
-			var id = e.navitem.projectid;
+			var id = e.getAttribute("index");
+			console.log(id);
 	        $scope.resData = $scope.projectData[id];
 	        $scope.showFlag = true
 		}

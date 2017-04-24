@@ -3,7 +3,7 @@
 {% block title %}商城-首页{% endblock %}
 
 {% block addcssjsblock %}
-    <link rel="stylesheet" type="text/css" href="../static/css/mine.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/mine.css">
     <script type="text/javascript" src="../static/js/index.js"></script>
 {% endblock %}
 
@@ -12,110 +12,60 @@
 <section class="bananaContain widthAuto">
 <!-- 下拉菜单栏 -->
 	<ul class="banaNavList heightFill paddTop10">
-		<li>
-			<a href="javascript:">点/验钞机</a>
-			<div class="banaNavListLeft">
-				<ol class="banaNavListContant paddTop10">
-					<li class="paddingV10"><a href="#">有线扫描枪</a></li>
-				</ol>
-			</div>
-		</li>
-	</ul>
+        {% for cate in cate_list %}
+            <li>
+                <a href="javascript:">{{ cate.parent.category_name }}</a>
+                <div class="banaNavListLeft">
+                    <ol class="banaNavListContant paddTop10">
+                        {% for child in cate.child %}
+                            <li class="paddingV10"><a href="#">{{ child.category_name }}</a></li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 <!-- banna轮播 -->
-	<div class="bananaBox" id="wrapBanner" ng-controller="moveSlide">
+	<div class="bananaBox" id="wrapBanner">
 		<ul id="slideList">
-			<li><a class="overFill" href="#"><img class="overFill" src="../static/image/banana.jpg"/></a></li>
-			<li><a class="overFill" href="#"><img class="overFill" src="../static/image/banana1.jpg"/></a></li>
-			<li><a class="overFill" href="#"><img class="overFill" src="../static/image/banana.jpg"/></a></li>
+            {% for banner in banner_list %}
+			    <li><a class="overFill" href="#"><img class="overFill" src="/upload/{{ banner.banner_image }}"/></a></li>
+            {% endfor %}
 		</ul>
 	</div>
 <!-- 四个跳转位 -->
 	<ul class="bananaSwitch widthFill marginTop10 paddTop5 clear">
-		<li><a class="overFill" href="#"><img class="overFill transformScale" src="../static/image/proid.png"/></a></li>
-		<li><a class="overFill" href="#"><img class="overFill transformScale" src="../static/image/proid.png"/></a></li>
-		<li><a class="overFill" href="#"><img class="overFill transformScale" src="../static/image/proid.png"/></a></li>
-		<li><a class="overFill" href="#"><img class="overFill transformScale" src="../static/image/proid.png"/></a></li>
+        {% for ad in ad_list %}
+            <li><a class="overFill" href="#"><img class="overFill transformScale" src="/upload/{{ ad.ad_image }}"/></a></li>
+        {% endfor %}
 	</ul>
 </section>
 <!-- 产品列表 -->
-<section class="widthFill" ng-controller="proCtr">
+<section class="widthFill">
 <!-- 优秀产品 -->
 	<section class="widthAuto paddTop10">
 		<div class="ProjectTitle paddingV10 clear">
 			<h3><a href="javascript:">赶尚优秀产品</a></h3>
 			<span class="switchWork">
-				<i class="switchBtnLeft" ng-click="prevProduct(this)"></i>
-				<i class="switchBtnRight" ng-click="nextProduct(this)"></i>
+				<i class="switchBtnLeft"></i>
+				<i class="switchBtnRight"></i>
 			</span>
 		</div>
 		<div class="productNice">
 			<ul class="clear" id="productNiceScorll">
-				<li class="transformtop">
-					<a href="#">
-						<img class="coverImg transformScale" src="../static/image/proid.png">
-					</a>
-					<div class="widthFill productNiceIntroduction marginTop10">
-						<h3>保险箱</h3>
-						<p>一种跨越安全的安全体验</p>
-						<em>￥1999</em>
-						<span>总销量：5654</span>
-					</div>
-				</li>
-				<li class="transformtop">
-					<a href="#">
-						<img class="coverImg transformScale" src="../static/image/proid.png">
-					</a>
-					<div class="widthFill productNiceIntroduction marginTop10">
-						<h3>保险箱</h3>
-						<p>一种跨越安全的安全体验</p>
-						<em>￥1999</em>
-						<span>总销量：5654</span>
-					</div>
-				</li>
-				<li class="transformtop">
-					<a href="#">
-						<img class="transformScale coverImg" src="../static/image/proid.png">
-					</a>
-					<div class="widthFill productNiceIntroduction marginTop10">
-						<h3>保险箱</h3>
-						<p>一种跨越安全的安全体验</p>
-						<em>￥1999</em>
-						<span>总销量：5654</span>
-					</div>
-				</li>
-				<li class="transformtop">
-					<a href="#">
-						<img class="coverImg transformScale" src="../static/image/proid.png">
-					</a>
-					<div class="widthFill productNiceIntroduction marginTop10">
-						<h3>保险箱</h3>
-						<p>一种跨越安全的安全体验</p>
-						<em>￥1999</em>
-						<span>总销量：5654</span>
-					</div>
-				</li>
-				<li class="transformtop">
-					<a href="#">
-						<img class="coverImg transformScale" src="../static/image/proid.png">
-					</a>
-					<div class="widthFill productNiceIntroduction marginTop10">
-						<h3>保险箱</h3>
-						<p>一种跨越安全的安全体验</p>
-						<em>￥1999</em>
-						<span>总销量：5654</span>
-					</div>
-				</li>
-				<li class="transformtop">
-					<a href="#">
-						<img class="coverImg transformScale" src="../static/image/proid.png">
-					</a>
-					<div class="widthFill productNiceIntroduction marginTop10">
-						<h3 title="一种跨越安全的安全体验一种跨越安全的安全体验">保险箱</h3>
-						<p>一种跨越安全的安全体验</p>
-						<em>￥1999</em>
-						<span>总销量：5654</span>
-					</div>
-				</li>
+                {% for product in good_list %}
+                    <li class="transformtop">
+                        <a href="#">
+                            <img class="coverImg transformScale" src="/upload/{{ product.product_thumb }}">
+                        </a>
+                        <div class="widthFill productNiceIntroduction marginTop10">
+                            <h3>{{ product.product_name }}</h3>
+                            <p>{{ product.product_intro }}</p>
+                            <em>￥{{ product.price }}</em>
+                            <span>总销量：{{ product.product_sum_sal }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
 			</ul>
 		</div>
 	</section>
@@ -123,32 +73,38 @@
 	<section class="indexContain widthFill" >
 		<ul class="widthFill" id="projectIndex">
 			<!-- 第一栏 -->
-			<li class="widthAuto" ng-repeat="ites in projectArray|limitTo:2">
-				<div class="pro_Index_head clear">
-					<h3 data-classId="{{ites.classid}}" ng-bind="ites.classtitle"></h3>
-					<a ng-href="{{ites.classLink}}">查看全部</a>
-				</div>
-				<section class="pro_Index_list clear">
-					<a ng-href="{{ites.fillImgLink}}" class="pro_Index_list_left transformtop">
-						<img ng-src="{{ites.fillImg}}" class="overFill" alt="{{ites.classtitle}}">
-					</a>
-					<ul class="pro_Index_list_right clear">
-						<li class="transformtop" ng-repeat="proItem in ites.projectFill|limitTo:8" data-proid="{{proItem.id}}">
-							<a ng-href="{{proItem.Link}}" title="{{proItem.txt}}">
-								<div class="pro_Index_list_img">
-									<img ng-src="{{proItem.Img}}" alt="{{proItem.txt}}">
-								</div>
-								<div class="pro_Index_list_emsg">
-									<h3 ng-bind="proItem.title"></h3>
-									<p ng-bind="proItem.txt"></p>
-									<em ng-bind="proItem.price| currency:'￥'"></em>
-									<span>总销量 : <em ng-bind="proItem.volume"></em></span>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</section>
-			</li>
+            {% for li in product_list %}
+                {% if li.child %}
+                    <li class="widthAuto">
+                        <div class="pro_Index_head clear">
+                            <h3>{{ li.parent.category_name }}</h3>
+                            <a href="/category/?category_id={{li.parent.pk}}">查看全部</a>
+                        </div>
+                        <section class="pro_Index_list clear">
+                            <a href="#" class="pro_Index_list_left transformtop">
+                                <img src="/upload/{{ li.parent.category_ad_img }}" class="overFill" alt="">
+                            </a>
+                            <ul class="pro_Index_list_right clear">
+                                {% for product in li.child %}
+                                    <li class="transformtop">
+                                        <a href="">
+                                            <div class="pro_Index_list_img">
+                                                <img src="/upload/{{ product.product_thumb }}">
+                                            </div>
+                                            <div class="pro_Index_list_emsg">
+                                                <h3>{{ product.product_name }}</h3>
+                                                <p>{{ product.product_intro }}</p>
+                                                <em>￥{{ product.price }}</em>
+                                                <span>总销量 : <em>{{ product.product_sum_sal }}</em></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                    </li>
+                {% endif %}
+            {% endfor %}
 		</ul>
 	</section>
 </section>

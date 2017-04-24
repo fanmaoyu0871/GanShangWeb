@@ -17,16 +17,26 @@ class User(models.Model):
         return self.username if len(self.username)>0 else self.phone
 
 @python_2_unicode_compatible
-class Banner(models.Model):
-    banner_image = models.FileField(upload_to='./')
+class Advantise(models.Model):
+    title = models.CharField('广告名称', max_length=30, default='')
+    ad_image = models.ImageField(upload_to='./')
 
     def __str__(self):
-        return self.banner_image
+        return self.title
+
+@python_2_unicode_compatible
+class Banner(models.Model):
+    title = models.CharField('名称', max_length=30, default='')
+    banner_image = models.ImageField(upload_to='./')
+
+    def __str__(self):
+        return self.title
 
 @python_2_unicode_compatible
 class Product_Category(models.Model):
     category_name = models.CharField('分类名称', max_length=30)
     parent_id = models.IntegerField('父分类id', default=0)
+    category_ad_img = models.ImageField('分类广告图片', null=True, blank=True)
 
     def __str__(self):
         return self.category_name
@@ -34,6 +44,9 @@ class Product_Category(models.Model):
 @python_2_unicode_compatible
 class Product(models.Model):
     product_name = models.CharField('产品名称', max_length=100)
+    product_thumb = models.ImageField(upload_to='./', null=True, blank=True)
+    product_intro = models.CharField('产品简介', max_length=20, null=True, blank=True)
+    product_sum_sal = models.IntegerField('总销量', default=0)
     category = models.ForeignKey(Product_Category)
     price = models.IntegerField('价格')
     real_price = models.IntegerField('促销价格', null=True, blank=True)
