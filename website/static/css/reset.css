@@ -14,7 +14,8 @@ select{-moz-appearance:none;-webkit-appearance:none;appearance:none;}
 input,button,select,textarea{outline:none;}
 input::-ms-clear{display:none;}
 input[type="number"]{-moz-appearance:textfield;}
-input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance: none !important; margin: 0;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{-webkit-appearance: none !important; margin: 0;}
 input[type="number"]:hover,input[type="number"]:focus { -moz-appearance: number-input;}
 a{text-decoration:none;display:block;outline:none;color:#515151;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;background:transparent;margin:0;padding:0;}
@@ -35,6 +36,8 @@ em,i{font-style:normal;display: inline-block;}
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.fl{float: left}
+.fr{float: right}
 /*margin*/
 .marginRight10{margin-right: 10px;}
 .marginLeft10{margin-left: 10px;}
@@ -115,7 +118,7 @@ img.coverImg{
   -moz-transform: scale(1.1);
   -ms-transform: scale(1.1);
 }
-.transformtop{
+.transformtop,.transformtop-lred{
   position: relative;
   -webkit-transition: all .3s linear;
   transition: all .3s linear;
@@ -128,6 +131,11 @@ img.coverImg{
   -webkit-transform:translate3d(0, -2px, 0);
   -moz-transform:translate3d(0, -2px, 0);
   transform:translate3d(0, -2px, 0);
+}
+.transformtop-lred:hover{
+  -webkit-box-shadow:0 0 15px rgb(247, 213, 197);
+  -moz-box-shadow:0 0 15px rgb(247, 213, 197);
+  box-shadow:0 0 15px rgb(247, 213, 197);
 }
 /*全局ICON图标*/
 .shop_cart_icon{

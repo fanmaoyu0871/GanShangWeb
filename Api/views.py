@@ -8,6 +8,7 @@ from dss.Serializer import serializer  #序列化模块
 from .models import User
 from .models import Product_Category
 from .models import Product
+from .models import ShopCar
 
 PAGE_SIZE = 20
 
@@ -105,3 +106,45 @@ def list_product(request, page):
         code_msg(response, 200, '获取产品列表成功')
 
     return HttpResponse(JsonResponse(response), content_type='application/json')
+
+
+#  del:删除  add:增加  sub:减少
+
+def shopcar_update(request, op):
+    user_id = request.POST['user_id']
+    product_id = request.POST['product_id']
+    response = {}
+
+    if(op == 'del'):
+        obj = ShopCar.objects.get(user = user_id, product = product_id)
+        if(obj is None):
+            code_msg(response, 100, '从购物车中删除商品失败')
+        else:
+            code_msg(response, 200, '成功将商品从购物车中删除')
+    else:
+        obj, flag = ShopCar.objects.get_or_create(user = user_id, product = product_id)
+
+        if( not flag):
+            if (op == 'add'):
+                count = int(obj.count) + 1
+            elif (op == 'sub'):
+                count = int(obj.count) - 1
+                if (count <= 0):
+                    code_msg(response, 100, '添加至购物车失败')
+                    return HttpResponse(JsonResponse(response), content_type='application/json')
+
+            price = count * obj.price
+
+            update_sum = ShopCar.objects.filter(user = user_id).filter(product = product_id).update(count = count, price = price)
+            if(update_sum == 1):
+                code_msg(response, 200, '成功添加商品至购物车')
+            else:
+                code_msg(response, 100, '添加至购物车失败')
+        else:
+            code_msg(response, 200, '成功添加商品至购物车')
+
+    response['data'] = serializer(obj)
+    return HttpResponse(JsonResponse(response), content_type='application/json')
+
+
+

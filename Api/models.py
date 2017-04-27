@@ -47,10 +47,13 @@ class Product(models.Model):
     product_thumb = models.ImageField(upload_to='./', null=True, blank=True)
     product_intro = models.CharField('产品简介', max_length=20, null=True, blank=True)
     product_sum_sal = models.IntegerField('总销量', default=0)
+    product_favorite_count = models.IntegerField('收藏数量', default=0)
+    rest_count = models.IntegerField('库存数量', default=0)
+    zhibao_year = models.IntegerField('质保时间', default=1)
     category = models.ForeignKey(Product_Category)
     price = models.IntegerField('价格')
-    real_price = models.IntegerField('促销价格', null=True, blank=True)
-    product_type = models.CommaSeparatedIntegerField('产品类型', max_length=100, null=True, blank=True)
+    real_price = models.IntegerField('促销价格', null=True, blank=True, default=0)
+    product_type = models.CharField('产品类型', max_length=50, null=True, blank=True)
     product_detail = UEditorField('产品细节', height=300, width=1000,
                                   default=u'', blank=True, imagePath="upload/images/",
                                   toolbars='besttome', filePath='upload/files/')
@@ -59,8 +62,22 @@ class Product(models.Model):
         return self.product_name
 
 @python_2_unicode_compatible
-class Product_thumb(models.Model):
-    thumb = models.FileField(upload_to='./')
+class Product_image(models.Model):
+    thumb = models.ImageField(upload_to='./')
+    product_id = models.ForeignKey(Product)
 
     def __str__(self):
-        return self.thumb
+        return str(self.product_id)
+
+@python_2_unicode_compatible
+class ShopCar(models.Model):
+    user = models.ForeignKey(User)
+    product = models.ForeignKey(Product)
+    count = models.IntegerField('数量', default=1)
+    price = models.IntegerField('价格', default=0)
+
+    def __str__(self):
+        return str(self.product)
+
+# @python_2_unicode_compatible
+# class Order(models.Model):

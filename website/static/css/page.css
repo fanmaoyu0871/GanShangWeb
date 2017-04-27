@@ -1,0 +1,63 @@
+/*@import url("reset.css");*/
+/* CSS Document 
+	xuxiang[jeesea]
+	2017-03-22
+	v1.0.01
+*/
+*{
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/*start css*/
+.foot_list{
+	margin-top: 30px;
+	float: right;
+}
+.foot_list *{
+	float: left;
+}
+.page_ym a,.foot_list>span{
+	height: 36px;
+  	font-size: 14px;
+  	font-weight: 500;
+  	text-align: center;
+  	line-height: 36px;
+  	border: solid 1px #e6e5e6;
+}
+.foot_list>span{
+	position: relative;
+	width: 84px;
+  	color: #9b9b9b;
+}
+.foot_list>span:first-child::before,.foot_list>span:last-child::after{
+	content: "";
+	position: absolute;
+	top: 50%;
+	display: block;
+	width: 8px;
+	height: 8px;
+	margin-top: -4px;
+	border-top: 1px solid #9b9b9b;
+	border-right: 1px solid #9b9b9b;
+}
+.foot_list>span:first-child::before{
+	left: 8px;
+	transform: rotate(225deg);
+}
+.foot_list>span:last-child::after{
+	right: 8px;
+	transform: rotate(45deg);
+}
+.page_ym a{
+	width: 36px;
+  	color: #4a4a4a;
+  	margin-right: 5px;
+  	background-color: #ffffff;
+}
+.foot_list div.page_ym a.pageActive{
+	color: #fff;
+	background-color: #e66020;
+  	border: solid 1px #e66020;
+}

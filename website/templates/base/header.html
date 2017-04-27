@@ -20,14 +20,14 @@
 	</section>
 <!-- 导航,logo,搜索框栏 -->
 	<section class="navListBox widthAuto flexbox flex_justify_B flex_item_center">
-		<a href="#" class="shopLogo"><h1>
-			<img src="../static/image/logo.png" width="140" height="49" alt="logo敢尚商城">
+		<a href="{% url 'index' %}" class="shopLogo"><h1>
+			<img src="/static/image/logo.png" width="140" height="49" alt="logo敢尚商城">
 		</h1></a>
 		<nav>
 			<ul class="flexbox flex_justify_A flex_item_center clear">
 				<!-- 不管后台传多少 最多显示五个 -->
                 {% for dict in product_list %}
-                    <li onmouseover="mouseOver(this)" data-index={{ dict.id }}><a href="">{{ dict.parent.category_name }}</a></li>
+                    <li onmouseover="mouseOver(this)" data-index={{ dict.id }}><a target="_blank" href="/category/?category_id={{ dict.id }}">{{ dict.parent.category_name }}</a></li>
                 {% endfor %}
 				<!-- 以下三个是固定的 -->
 				<li><a href="#网点信息">网点信息</a></li>
@@ -38,7 +38,6 @@
 		<div class="searchBox flexbox flex_justify_S paddLeft5">
 			<i class="search_icon"></i>
 			<form target="_blank" action="{% url 'search_list' %}" method="get">
-                {% csrf_token %}
 				<input type="search" name="search" class="marginLeft5" id="searchForm"/>
 			</form>
 		</div>

@@ -1,9 +1,17 @@
+# -*- coding:utf-8 -*-
 from django.contrib import admin
 from .models import Banner
 from .models import User
 from .models import Product_Category
 from .models import Product
 from .models import Advantise
+from .models import Product_image
+
+
+import sys
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 # Register your models here.
 class BannerAdmin(admin.ModelAdmin):
@@ -27,9 +35,14 @@ class ProductAdmin(admin.ModelAdmin):
 class AdvantiseAdmin(admin.ModelAdmin):
     list_display = ('title', 'ad_image')
 
+class Product_imageAdmin(admin.ModelAdmin):
+    list_display = ('product_id', 'thumb')
+    
+
 
 admin.site.register(Banner, BannerAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Product_Category, Product_CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Product_image, Product_imageAdmin)
 admin.site.register(Advantise, AdvantiseAdmin)

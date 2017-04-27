@@ -3,7 +3,6 @@
 {% block title %}商城-首页{% endblock %}
 
 {% block addcssjsblock %}
-    <link rel="stylesheet" type="text/css" href="/static/css/mine.css">
     <script type="text/javascript" src="../static/js/index.js"></script>
 {% endblock %}
 
@@ -14,11 +13,11 @@
 	<ul class="banaNavList heightFill paddTop10">
         {% for cate in cate_list %}
             <li>
-                <a href="javascript:">{{ cate.parent.category_name }}</a>
+                <a href="/category/?category_id={{ cate.parent.pk }}">{{ cate.parent.category_name }}</a>
                 <div class="banaNavListLeft">
                     <ol class="banaNavListContant paddTop10">
                         {% for child in cate.child %}
-                            <li class="paddingV10"><a href="#">{{ child.category_name }}</a></li>
+                            <li class="paddingV10"><a href="/category/?category_id={{ child.pk }}">{{ child.category_name }}</a></li>
                         {% endfor %}
                     </ol>
                 </div>
@@ -55,7 +54,7 @@
 			<ul class="clear" id="productNiceScorll">
                 {% for product in good_list %}
                     <li class="transformtop">
-                        <a href="#">
+                        <a href="/product/?product_id={{ product.pk }}">
                             <img class="coverImg transformScale" src="/upload/{{ product.product_thumb }}">
                         </a>
                         <div class="widthFill productNiceIntroduction marginTop10">
@@ -87,7 +86,7 @@
                             <ul class="pro_Index_list_right clear">
                                 {% for product in li.child %}
                                     <li class="transformtop">
-                                        <a href="">
+                                        <a href="/product/?product_id={{ product.pk }}">
                                             <div class="pro_Index_list_img">
                                                 <img src="/upload/{{ product.product_thumb }}">
                                             </div>

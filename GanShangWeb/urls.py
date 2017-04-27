@@ -29,10 +29,13 @@ urlpatterns = [
     url(r'^ueditor/', include(DjangoUeditor_urls)),
     url(r'^api/v1/product/categorys/$', api.categorys),
     url(r'^api/v1/product/list_product/(\d+)/$', api.list_product),
+    url(r'^api/v1/shopcar/[A-Za-z]+/$', api.shopcar_update),
 
-    url(r'^$', Site_views.index),
+    url(r'^$', Site_views.index, name='index'),
     url(r'^category/$', Site_views.category_view, name='category_view'),
-    url(r'^search/$', Site_views.search_list, name='search_list')
+    url(r'^search/$', Site_views.search_list, name='search_list'),
+    url(r'^product/filter/$', Site_views.product_filter_price, name='product_filter_price'),
+    url(r'^product/$', Site_views.product_detail, name='product_detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

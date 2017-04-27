@@ -18,16 +18,41 @@
 				<input type="number" min="0" name="fastPrice" ng-model="minprice" placeholder="最小0元"/>
 				<i class="marginH10">——</i>
 				<input type="number" min="1" name="lastPrice" ng-model="maxprice" placeholder="最小1元"/>
-				<button ng-click="searchPost()">确定</button>
+				<button id="sureBtn">确定</button>
 			</div>
 		</section>
+        <script>
+            $(function (){
+                $('#sureBtn').click(function(){
+                    var fastPrice = $('[name=fastPrice]').val();
+                    var lastPrice = $('[name=lastPrice]').val();
+                    var condition = {{ condition_json | safe }};
+
+                    $.getJSON('{% url 'product_filter_price'%}',
+                        {'fastPrice':fastPrice, 'lastPrice':lastPrice, 'search':condition},
+                        function(search_list){
+                            $('.projectList li').remove();
+
+                            var obj = search_list.product_list_json;
+                            for(var i = 0; i < obj.length; i++){
+                                var product = obj[i];
+                                 var node ='<li class="transformtop">' +
+                                '<a href="/product/?product_id="' + product.pk + '>' +
+                                '<div class="pro_Index_list_img">' +
+                                '<img  alt=' + product.product_intro + '\"' + ' src=/upload/' + product.product_thumb  + '> </div> <div class="pro_Index_list_emsg"> <h3>' + product.product_name + '</h3> <p>' + product.product_intro + '</p> <em>¥ ' + product.price  + '</em> <span>总销量 : <em>' + product.product_sum_sal + '</em></span> </div> </a> </li>';
+                                $('.projectList').append(node);
+                            }
+                    });
+                });
+            })
+        </script>
 	</div>
 	<!-- 搜索的产品信息 -->
 	<section class="widthAuto searchProject">
 		<ul class="widthFill clear projectList">
-            {% for product in product_list %}
+            {% for product in search_list %}
                 <li class="transformtop">
-                    <a href="#" >
+                    <a href="/product/?product_id={{ product.pk }}" >
                         <div class="pro_Index_list_img">
                             <img src="/upload/{{ product.product_thumb}}" alt="{{ product.product_intro }}">
                         </div>

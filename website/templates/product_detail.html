@@ -1,0 +1,265 @@
+{% extends './base/base.html' %}
+{% block title %}产品详情{% endblock %}
+
+{% block addcssjsblock %}<link rel="stylesheet" type="text/css" href="/static/css/headFoot.css">
+<link rel="stylesheet" type="text/css" href="/static/css/mine.css">
+<link rel="stylesheet" type="text/css" href="/static/css/page.css">
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.3/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<!-- <section class="widthFill" ng-controller="search"> -->
+<section class="widthFill bordDetail">
+	<section class="clear widthAuto paddingV10">
+		<div class="showImgLeft">
+			<div class="big_img">
+				<img src="/upload/{{ first_thumb.thumb }}"/>
+			</div>
+			<ol class="clear showImgList marginTop10 paddingV5">
+                {% for product in thumb_list %}
+                    <li><img src="/upload/{{ product.thumb }}"/></li>
+                {% endfor %}
+			</ol>
+		</div>
+		<div class="showMegRight">
+			<h3>{{ product.product_name }}{{ product.product_intro }}</h3>
+			<div class="d_item_list bgf2">
+				<p class="clear">
+					<a href="javascript:">价　格：￥{{ product.price }}</a>
+					<a href="javascript:">成交数量：{{ product.product_sum_sal }}</a>
+				</p>
+				<p class="clear">
+					<a href="javascript:" class="c-orange">促销价：￥{% if product.real_price != 0 %}{{ product.real_price }}{% else %}{{ product.price }}{% endif %}</a>
+					<a href="javascript:">收藏数量：{{ product.product_favorite_count }}</a>
+				</p>
+			</div>
+			<div class="clear d_item d_item_label">
+				<label>型号：</label>
+                {% for type in type_list %}
+                    <span>{{ type }}</span>
+                {% endfor %}
+			</div>
+			<div class="clear d_item d_item_type">
+				<label>颜色：</label>
+				<span><img src="image/pic/color1.png"></span><span><img src="image/pic/color2.png"></span>
+			</div>
+			<div class="clear d_item d_item_label">
+				<label>数量：</label>
+				<div class="quantity" id="quantity">
+					<input type="number" name="quantity" min="1" value="1" placeholder="最小1" disabled="disabled">
+				</div>
+				<em class="repertory">库存<i>{{ product.rest_count }}</i>件</em>
+			</div>
+			<div class="clear d_item_volume">
+				<label class="d_kc">库存：<em>1265</em></label>
+				<label class="d_yxl">月销量：<em>1111</em></label>
+				<label class="d_bzq"><em>{{ product.zhibao_year }}</em> 年质保</label>
+			</div>
+			<div class="clear d_item_getBtn paddTop10 marginTop10">
+				<button class="purchase">立即购买</button>
+				<button class="shop_cart">加入购物车</button>
+			</div>
+		</div>
+	</section>
+</section>
+<!-- 为您推荐 -->
+<section class="recommend">
+	<ol class="clear widthAuto caption titleNav">
+		<li><a class="titleActive" href="javascript:">为你推荐</a></li>
+	</ol>
+	<section class="widthAuto searchProject">
+		<ul class="widthFill clear projectList">
+			<li class="transformtop-lred" data-proid="jk25852">
+				<a title="无线扫描好枪" href="#linkp">
+					<div class="pro_Index_list_img">
+						<img alt="无线扫描好枪" src="/upload/{{ first_thumb.thumb }}">
+					</div>
+					<div class="pro_Index_list_emsg">
+						<h3>扫描机</h3>
+						<p>无线扫描好枪</p>
+						<em>￥250.00</em>
+						<span>总销量 : <em>201</em></span>
+					</div>
+				</a>
+			</li><li class="transformtop-lred" data-proid="jk25852">
+				<a title="无线扫描好枪" href="#linkp">
+					<div class="pro_Index_list_img">
+						<img alt="无线扫描好枪" src="/upload/{{ first_thumb.thumb }}">
+					</div>
+					<div class="pro_Index_list_emsg">
+						<h3>扫描机</h3>
+						<p>无线扫描好枪</p>
+						<em>￥250.00</em>
+						<span>总销量 : <em>201</em></span>
+					</div>
+				</a>
+			</li><li class="transformtop-lred" data-proid="jk25852">
+				<a title="无线扫描好枪" href="#linkp">
+					<div class="pro_Index_list_img">
+						<img alt="无线扫描好枪" src="/upload/{{ first_thumb.thumb }}">
+					</div>
+					<div class="pro_Index_list_emsg">
+						<h3>扫描机</h3>
+						<p>无线扫描好枪</p>
+						<em>￥250.00</em>
+						<span>总销量 : <em>201</em></span>
+					</div>
+				</a>
+			</li><li class="transformtop-lred" data-proid="jk25852">
+				<a title="无线扫描好枪" href="#linkp">
+					<div class="pro_Index_list_img">
+						<img alt="无线扫描好枪" src="/upload/{{ first_thumb.thumb }}">
+					</div>
+					<div class="pro_Index_list_emsg">
+						<h3>扫描机</h3>
+						<p>无线扫描好枪</p>
+						<em>￥250.00</em>
+						<span>总销量 : <em>201</em></span>
+					</div>
+				</a>
+			</li><li class="transformtop-lred" data-proid="jk25852">
+				<a title="无线扫描好枪" href="#linkp">
+					<div class="pro_Index_list_img">
+						<img alt="无线扫描好枪" src="/upload/{{ first_thumb.thumb }}">
+					</div>
+					<div class="pro_Index_list_emsg">
+						<h3>扫描机</h3>
+						<p>无线扫描好枪</p>
+						<em>￥250.00</em>
+						<span>总销量 : <em>201</em></span>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</section>
+</section>
+<!-- 【评论详情 -->
+<section class="recommend">
+	<ol class="clear widthAuto caption" id="captionTitle">
+		<li data-protype="1"><a class="titleActive" href="javascript:">为你推荐</a></li>
+		<li data-protype="1"><a href="javascript:">用户评价</a></li>
+	</ol>
+	<div class="widthAuto" id="review">
+		<section class="marginTop10 widthFill d_recommend">
+			<div class="d_rec_msg bgf2 paddTop10">
+				<span class="d_rec_title">产品参数</span>
+				<ul class="clear d_msg_list">
+					<li>品牌：维融</li>
+					<li>解码类型：一维</li>
+					<li>抗震类型：1.5M</li>
+					<li>尺寸：165L*70W*95H</li>
+					<li>扫码类型：商品/快递单</li>
+					<li>实际重量：300克</li>
+				</ul>
+			</div>
+			<div class="marginTop10" style="height: 500px;background-color: #f2f2f2;">
+                {% autoescape off %}
+                {{ product.product_detail }}
+                {% endautoescape %}
+            </div>
+		</section>
+		<section id="d_comment">
+			<ul class="d_comment">
+				<li class="clear">
+					<div class="d_comment_l fl">
+						<div class="d_comment_l_headImg"><img class="overFill" src="image/pic/1.png""></div>
+						<h3>爽爽万岁</h3>
+					</div>
+					<div class="d_comment_r fr">
+						<div class="clear widthFill fl d_comment_r_star"><i class="starActive"></i><i></i><i></i><i></i><i></i></div>
+						<p class="widthFill paddingV10">扫描起来灵敏度很高，安装简单，非常容易上手。特别适合我们这些笨手笨脚的，给大大的好评。可以称得上是物美价廉。很好，很满意。</p>
+						<div class="clear widthFill d_comment_r_workid">
+							<span class="fl marginRight10"><img class="overFill" src="image/pic/color2.png""></span>
+							<span class="fl marginRight10"><img class="overFill" src="image/pic/color1.png""></span>
+						</div>
+						<a class="d_comment_r_time marginTop10" href="javascript:">2017-1-14   13:34:34</a>
+					</div>
+				</li>
+				<li class="clear">
+					<div class="d_comment_l fl">
+						<div class="d_comment_l_headImg"><img class="overFill" src="image/pic/2.png""></div>
+						<h3>爽爽万岁</h3>
+					</div>
+					<div class="d_comment_r fr">
+						<div class="clear widthFill fl d_comment_r_star"><i class="starActive"></i><i class="starActive"></i><i class="starActive"></i><i class="starActive"></i><i></i></div>
+						<p class="widthFill paddingV10">扫描起来灵敏度很高，安装简单，非常容易上手。特别适合我们这些笨手笨脚的，给大大的好评。可以称得上是物美价廉。很好，很满意。</p>
+						<div class="clear widthFill d_comment_r_workid">
+							<span class="fl marginRight10"><img class="overFill" src="image/pic/color2.png""></span>
+							<span class="fl marginRight10"><img class="overFill" src="image/pic/color1.png""></span>
+							<span class="fl marginRight10"><img class="overFill" src="image/pic/color2.png""></span>
+							<span class="fl marginRight10"><img class="overFill" src="image/pic/color1.png""></span>
+							<span class="fl marginRight10"><img class="overFill" src="image/pic/color2.png""></span>
+							<span class="fl marginRight10"><img class="overFill" src="image/pic/color1.png""></span>
+						</div>
+						<a class="d_comment_r_time marginTop10" href="javascript:">2017-1-14   13:34:34</a>
+					</div>
+				</li>
+			</ul>
+			<div class="foot_page widthAuto">
+				<div class="clear foot_list">
+					<span class="pagePrev marginRight5">上一页</span>
+					<div class="clear page_ym">
+						<a class="pageActive" href="javascript:">1</a>
+						<a href="javascript:">2</a>
+						<a href="javascript:">3</a>
+						<a href="javascript:">4</a>
+						<a href="javascript:">5</a>
+					</div>
+					<span class="pageNext">下一页</span>
+				</div>
+			</div>
+		</section>
+	</div>
+</section>
+</body>
+<script type="text/javascript">
+	$(function(){
+		// 以下为效果部分   勿动
+		for (var i = 0; i < 2; i++) {
+			$("#quantity").append("<i></i>");
+		}
+		var mountBtn = $("#quantity").children("i"),
+			valArry = $("#quantity").children('input[type="number"]'),
+			val = parseInt(valArry.val()),
+			kuc = $(".repertory").children();
+		$(".big_img").children().attr("src",$(".showImgList").children().eq(0).children().attr("src"));
+		$(".showImgList").children().eq(0).addClass("Active");
+		$(".showImgList").children().click(function(){
+			var src = $(this).children().attr("src");
+				$(".showImgList").children().removeClass("Active");
+				$(this).addClass("Active");
+				$(".big_img").children().attr("src",src);
+		});
+		var nm = parseFloat(kuc.text());
+		var quan = function(e){
+			val += e;
+			var nmp = nm - val;
+			if (val<1) {
+				val = 1;
+				nmp = nm;
+				alert("最少选择一件");
+			} else if (nmp <= 0) {
+				nmp = 0;
+				val = nm;
+				alert("库存不足");
+			} 
+			valArry.val(val)
+			kuc.text(nmp)
+			console.log(nmp);
+		},
+		togg = function(obj){
+			 $(obj).addClass("borderActive").siblings().removeClass("borderActive");
+		};
+		$("#review").children().eq(0).show();
+		$("#captionTitle").children("li").click(function(){
+			var n = $(this).index();
+			$(this).children().addClass("titleActive").parent("li").siblings().children().removeClass("titleActive");
+			$("#review").children().hide();
+			$("#review").children().eq(n).show();
+		});
+		$(".d_item > span").click(function(){togg(this)});
+		mountBtn.eq(0).click(function(){ quan(1)});
+		mountBtn.eq(1).click(function(){ quan(-1)});
+	});
+</script>
+{% endblock %}
