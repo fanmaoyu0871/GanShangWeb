@@ -623,3 +623,7 @@ ul.projectList li:nth-child(5n){
 	float: left;
 	padding-bottom: 15px;
 }
+
+.d_recommend div img{
+	display: inline;
+}

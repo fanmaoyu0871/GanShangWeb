@@ -80,6 +80,7 @@ def changePassword(request):
 
 
 #-----***************************------------ Product  Module ------------***************************---------------------
+#查找所有分类
 def categorys(request):
     qs = Product_Category.objects.filter(parent_id=0)
     response = {}
@@ -92,20 +93,56 @@ def categorys(request):
 
     return HttpResponse(JsonResponse(response), content_type='application/json')
 
-def list_product(request, page):
-    category_id = request.POST['category_id']
+#查找对应分类id下的产品
+def list_product(request):
+    category_id = request.GET['category_id']
+    page = request.GET['page']
     response = {}
 
-    if(not category_id):
+    if (not category_id):
         code_msg(response, 100, '参数错误：未传分类id')
     else:
-        qs = Product_Category.objects.filter(parent_id = category_id)
-        li = [obj.pk for obj in qs]
-        qs = Product.objects.filter(category_id__in = li)[(int(page)-1)*PAGE_SIZE:int(page)*PAGE_SIZE]
-        response['data'] = serializer(qs)
-        code_msg(response, 200, '获取产品列表成功')
+        if (int(category_id) == 0):
+            qs = Product.objects.all().order_by('-product_sum_sal')
+        else:
+            qs = Product_Category.objects.filter(parent_id=category_id)
+            li = [obj.pk for obj in qs]
+            qs = Product.objects.filter(category_id__in=li)[(int(page) - 1) * PAGE_SIZE:int(page) * PAGE_SIZE]
+
+    response['data'] = serializer(qs)
+    code_msg(response, 200, '获取产品列表成功')
 
     return HttpResponse(JsonResponse(response), content_type='application/json')
+
+
+# 首页展示列表
+def shouye_list(request):
+
+    result = {}
+    # good product , order by column of 'product_sum_sale'
+    good_list = Product.objects.all().order_by('-product_sum_sal')
+    result['good_list'] = serializer(good_list)
+
+    # product list
+    parent_list = Product_Category.objects.filter(parent_id=0)
+    product_list = []
+    for cate in parent_list:
+        response = {}
+        response['parent'] = serializer(cate)
+        qs = Product_Category.objects.filter(parent_id=cate.pk)
+        li = [obj.pk for obj in qs]
+        qs = Product.objects.filter(category_id__in=li)
+        response['child'] = serializer(qs)
+        product_list.append(response)
+    result['product_list'] = product_list
+
+    response = {}
+    response['data'] = serializer(result)
+    code_msg(response, 200, '获取首页数据成功')
+
+    return HttpResponse(JsonResponse(response), content_type='application/json')
+
+
 
 
 #  del:删除  add:增加  sub:减少

@@ -37,6 +37,8 @@ class Product_Category(models.Model):
     category_name = models.CharField('分类名称', max_length=30)
     parent_id = models.IntegerField('父分类id', default=0)
     category_ad_img = models.ImageField('分类广告图片', null=True, blank=True)
+    category_app_big_icon = models.ImageField('app分类大图标', null=True, blank=True)
+    category_app_small_icon = models.ImageField('app分类小图标', null=True, blank=True)
 
     def __str__(self):
         return self.category_name
@@ -55,8 +57,8 @@ class Product(models.Model):
     real_price = models.IntegerField('促销价格', null=True, blank=True, default=0)
     product_type = models.CharField('产品类型', max_length=50, null=True, blank=True)
     product_detail = UEditorField('产品细节', height=300, width=1000,
-                                  default=u'', blank=True, imagePath="upload/images/",
-                                  toolbars='besttome', filePath='upload/files/')
+                                  default=u'', blank=True, imagePath="./images/",
+                                  toolbars='besttome', filePath='./files/')
 
     def __str__(self):
         return self.product_name

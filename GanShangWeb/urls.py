@@ -23,14 +23,18 @@ from website import views as Site_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^ueditor/', include(DjangoUeditor_urls)),
+
+    #api
     url(r'^api/v1/user/reg/$', api.reg),
     url(r'^api/v1/user/login/$', api.login),
     url(r'^api/v1/user/changePassword/$', api.changePassword),
-    url(r'^ueditor/', include(DjangoUeditor_urls)),
     url(r'^api/v1/product/categorys/$', api.categorys),
-    url(r'^api/v1/product/list_product/(\d+)/$', api.list_product),
+    url(r'^api/v1/product/list_product/$', api.list_product),
+    url(r'^api/v1/product/shouye_list/$', api.shouye_list),
     url(r'^api/v1/shopcar/[A-Za-z]+/$', api.shopcar_update),
 
+    #web site
     url(r'^$', Site_views.index, name='index'),
     url(r'^category/$', Site_views.category_view, name='category_view'),
     url(r'^search/$', Site_views.search_list, name='search_list'),
