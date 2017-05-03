@@ -16,6 +16,7 @@ class User(models.Model):
     def __str__(self):
         return self.username if len(self.username)>0 else self.phone
 
+
 @python_2_unicode_compatible
 class Advantise(models.Model):
     title = models.CharField('广告名称', max_length=30, default='')
@@ -80,6 +81,14 @@ class ShopCar(models.Model):
 
     def __str__(self):
         return str(self.product)
+
+@python_2_unicode_compatible
+class Favirate(models.Model):
+    user = models.ForeignKey(User)
+    product = models.ForeignKey(Product)
+
+    def __str__(self):
+        return self.id
 
 # @python_2_unicode_compatible
 # class Order(models.Model):

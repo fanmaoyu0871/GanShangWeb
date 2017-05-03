@@ -29,10 +29,12 @@ urlpatterns = [
     url(r'^api/v1/user/reg/$', api.reg),
     url(r'^api/v1/user/login/$', api.login),
     url(r'^api/v1/user/changePassword/$', api.changePassword),
+    url(r'^api/v1/user/favirate_list/$', api.favirate_list),
     url(r'^api/v1/product/categorys/$', api.categorys),
     url(r'^api/v1/product/list_product/$', api.list_product),
     url(r'^api/v1/product/shouye_list/$', api.shouye_list),
     url(r'^api/v1/shopcar/[A-Za-z]+/$', api.shopcar_update),
+    url(r'^api/v1/product/favirate/$', api.favirate_op),
 
     #web site
     url(r'^$', Site_views.index, name='index'),

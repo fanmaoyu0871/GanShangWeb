@@ -9,6 +9,7 @@ from .models import User
 from .models import Product_Category
 from .models import Product
 from .models import ShopCar
+from .models import Favirate
 
 PAGE_SIZE = 20
 
@@ -183,5 +184,38 @@ def shopcar_update(request, op):
     response['data'] = serializer(obj)
     return HttpResponse(JsonResponse(response), content_type='application/json')
 
+# 添加／删除收藏
+def favirate_op(request):
+    user_id = request.POST['user_id']
+    product_id = request.POST['product_id']
+    response = {}
+
+    obj, flag = Favirate.objects.get_or_create(product_id=product_id, user_id=user_id)
+
+    if(flag):
+        code_msg(response, 200, '添加收藏成功')
+    else:
+        obj = Favirate.objects.filter(product_id=product_id).get(user_id=user_id)
+        obj.delete()
+        code_msg(response, 200, '删除收藏成功')
+
+    response['data'] = serializer(obj)
+    return HttpResponse(JsonResponse(response), content_type='application/json')
+
+def favirate_list(request):
+    user_id = request.POST['user_id']
+    response = {}
+    container = []
+
+    favi_list =  Favirate.objects.filter(user_id=user_id)
+    for obj in favi_list:
+        container.append(obj.product_id)
+
+    result = Product.objects.filter(id__in=container)
+
+    code_msg(response, 200, '获取收藏列表成功')
+
+    response['data'] = serializer(result)
+    return HttpResponse(JsonResponse(response), content_type='application/json')
 
 
