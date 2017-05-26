@@ -3,7 +3,7 @@
 {% block title %}商城-首页{% endblock %}
 
 {% block addcssjsblock %}
-    <script type="text/javascript" src="../static/js/index.js"></script>
+    <script type="text/javascript" src="/static/js/index.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -54,7 +54,7 @@
 			<ul class="clear" id="productNiceScorll">
                 {% for product in good_list %}
                     <li class="transformtop">
-                        <a href="/product/?product_id={{ product.pk }}">
+                        <a href="/product/product_id={{ product.pk }}">
                             <img class="coverImg transformScale" src="/upload/{{ product.product_thumb }}">
                         </a>
                         <div class="widthFill productNiceIntroduction marginTop10">
@@ -86,7 +86,7 @@
                             <ul class="pro_Index_list_right clear">
                                 {% for product in li.child %}
                                     <li class="transformtop">
-                                        <a href="/product/?product_id={{ product.pk }}">
+                                        <a href="">
                                             <div class="pro_Index_list_img">
                                                 <img src="/upload/{{ product.product_thumb }}">
                                             </div>

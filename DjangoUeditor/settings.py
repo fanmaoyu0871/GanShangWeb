@@ -20,7 +20,7 @@ UEditorUploadSettings={
     "imageActionName": "uploadimage", #执行上传图片的action名称
     "imageMaxSize": 10485760, #上传大小限制，单位B,10M
     "imageFieldName": "upfile", #* 提交的图片表单名称 */
-    "imageUrlPrefix":"",
+    "imageUrlPrefix":gSettings.PRE_FIX,
     "imagePathFormat":"",
     "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], #上传图片格式显示
 

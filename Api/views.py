@@ -2,6 +2,7 @@
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.forms.models import model_to_dict
 
 from dss.Serializer import serializer  #序列化模块
 
@@ -10,6 +11,7 @@ from .models import Product_Category
 from .models import Product
 from .models import ShopCar
 from .models import Favirate
+from .models import Product_attribut
 
 PAGE_SIZE = 20
 
@@ -21,6 +23,12 @@ PAGE_SIZE = 20
 def code_msg(dict, code, msg):
     dict['code'] = code
     dict['msg'] = msg
+
+def merge_dict(dict1, dict2):
+    result = dict1.copy()
+    result.update(dict2)
+
+    return result
 
 
 def reg(request):
@@ -143,45 +151,82 @@ def shouye_list(request):
 
     return HttpResponse(JsonResponse(response), content_type='application/json')
 
+#商品详情
+def product_detail(request):
+    product_id = request.POST['product_id']
+    group = []
+
+    product_info = Product.objects.get(id=product_id)
+
+    tmp = model_to_dict(product_info)
+
+    #收集产品属性
+    attribute_list = product_info.product_attr.all()
+    for attr in attribute_list:
+        items = []
+        attrs = Product_attribut.objects.filter(category_attr_id = attr.id)
+        for item in attrs:
+            dict = {'attr_id':item.id, 'attr_name':item.attr_value}
+            items.append(dict)
+
+        group.append({'attr_name':attr.attr_name, 'attr_value': items})
+
+    tmp_dict = merge_dict(tmp, {'product_attr':group})
+
+    response = {}
+    response['data'] = serializer(tmp_dict)
+    code_msg(response, 200, '获取首页数据成功')
+
+    return HttpResponse(JsonResponse(response), content_type='application/json')
 
 
-
-#  del:删除  add:增加  sub:减少
-
-def shopcar_update(request, op):
+#  del:删除  add:增加  sub:减少 购物车
+def shopcar_update(request, op, count):
     user_id = request.POST['user_id']
     product_id = request.POST['product_id']
+    attr = request.POST['attr']
     response = {}
+    sum_count = 1
+    exist_flag = False
 
-    if(op == 'del'):
-        obj = ShopCar.objects.get(user = user_id, product = product_id)
-        if(obj is None):
-            code_msg(response, 100, '从购物车中删除商品失败')
-        else:
-            code_msg(response, 200, '成功将商品从购物车中删除')
-    else:
-        obj, flag = ShopCar.objects.get_or_create(user = user_id, product = product_id)
+    attr_ids = attr.strip().split(',')
+    attr_ids = [ int(string) for string in attr_ids ]
 
-        if( not flag):
-            if (op == 'add'):
-                count = int(obj.count) + 1
-            elif (op == 'sub'):
-                count = int(obj.count) - 1
-                if (count <= 0):
-                    code_msg(response, 100, '添加至购物车失败')
-                    return HttpResponse(JsonResponse(response), content_type='application/json')
+    obj = ShopCar.objects.filter(user_id=user_id, product_id=product_id)
 
-            price = count * obj.price
+    for li in obj:
+        tmp = [product_attr.id for product_attr in li.attr.all()]
+        if (tmp == attr_ids): #购物车中有该属性商品
 
-            update_sum = ShopCar.objects.filter(user = user_id).filter(product = product_id).update(count = count, price = price)
-            if(update_sum == 1):
-                code_msg(response, 200, '成功添加商品至购物车')
+            if(op == 'del'):
+                li.delete()
+                code_msg(response, 200, '成功将商品从购物车中删除')
             else:
-                code_msg(response, 100, '添加至购物车失败')
-        else:
-            code_msg(response, 200, '成功添加商品至购物车')
+                if (op == 'add'):
+                    sum_count = int(li.count) + int(count)
+                elif (op == 'sub'):
+                    sum_count = int(li.count) - int(count)
+                    if (sum_count <= 0):
+                        code_msg(response, 100, '数量不能小于1个')
+                        return HttpResponse(JsonResponse(response), content_type='application/json')
 
-    response['data'] = serializer(obj)
+                li.count=sum_count
+                li.save()
+                code_msg(response, 200, '成功添加商品至购物车')
+
+            exist_flag = True
+            break
+
+    if not exist_flag: #不存在
+        good, flag = ShopCar.objects.get_or_create(user_id=user_id, product_id=product_id, count=1)
+        for attr_id in attr_ids:
+            tmp_obj = Product_attribut.objects.get(pk=attr_id)
+            good.attr.add(tmp_obj)
+        code_msg(response, 200, '成功添加商品至购物车')
+
+
+
+    response['data'] = serializer({'count':sum_count})
     return HttpResponse(JsonResponse(response), content_type='application/json')
 
 # 添加／删除收藏
@@ -202,6 +247,7 @@ def favirate_op(request):
     response['data'] = serializer(obj)
     return HttpResponse(JsonResponse(response), content_type='application/json')
 
+# 收藏列表
 def favirate_list(request):
     user_id = request.POST['user_id']
     response = {}
@@ -218,4 +264,22 @@ def favirate_list(request):
     response['data'] = serializer(result)
     return HttpResponse(JsonResponse(response), content_type='application/json')
 
+#购物车列表
+def gouwuche_list(request):
+    user_id = request.POST['user_id']
+    response = {}
+    container = []
 
+    gouwuche_list = ShopCar.objects.filter(user_id=user_id).values('product_id', 'count', 'user_id')
+    for car in gouwuche_list:
+        product_id = car['product_id']
+        obj = Product.objects.filter(id=product_id).values('product_name', 'product_intro', 'price', 'product_thumb')[0]
+        fav = Favirate.objects.filter(user_id=user_id, product_id=product_id).all()
+        obj = merge_dict(obj, {'isFavirate':  True  if len(fav) != 0 else False})
+
+        container.append(merge_dict(car, obj))
+
+    code_msg(response, 200, '获取购物车列表成功')
+
+    response['data'] = serializer(container)
+    return HttpResponse(JsonResponse(response), content_type='application/json')

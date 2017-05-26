@@ -33,8 +33,10 @@ urlpatterns = [
     url(r'^api/v1/product/categorys/$', api.categorys),
     url(r'^api/v1/product/list_product/$', api.list_product),
     url(r'^api/v1/product/shouye_list/$', api.shouye_list),
-    url(r'^api/v1/shopcar/[A-Za-z]+/$', api.shopcar_update),
+    url(r'^api/v1/product/detail/$', api.product_detail),
     url(r'^api/v1/product/favirate/$', api.favirate_op),
+    url(r'^api/v1/shopcar/op/(\w+)/(\d+)/$', api.shopcar_update),
+    url(r'^api/v1/shopcar/gouwuche_list/$', api.gouwuche_list),
 
     #web site
     url(r'^$', Site_views.index, name='index'),

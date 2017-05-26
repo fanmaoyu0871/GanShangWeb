@@ -34,6 +34,14 @@ class Banner(models.Model):
         return self.title
 
 @python_2_unicode_compatible
+class All_attribute(models.Model):
+    attr_name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.attr_name
+
+
+@python_2_unicode_compatible
 class Product_Category(models.Model):
     category_name = models.CharField('分类名称', max_length=30)
     parent_id = models.IntegerField('父分类id', default=0)
@@ -56,7 +64,7 @@ class Product(models.Model):
     category = models.ForeignKey(Product_Category)
     price = models.IntegerField('价格')
     real_price = models.IntegerField('促销价格', null=True, blank=True, default=0)
-    product_type = models.CharField('产品类型', max_length=50, null=True, blank=True)
+    product_attr = models.ManyToManyField(All_attribute, verbose_name='产品属性')
     product_detail = UEditorField('产品细节', height=300, width=1000,
                                   default=u'', blank=True, imagePath="./images/",
                                   toolbars='besttome', filePath='./files/')
@@ -65,19 +73,31 @@ class Product(models.Model):
         return self.product_name
 
 @python_2_unicode_compatible
+class Product_attribut(models.Model):
+    product = models.ForeignKey(Product)
+    category_attr = models.ForeignKey(All_attribute)
+    attr_value = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.attr_value
+
+@python_2_unicode_compatible
 class Product_image(models.Model):
     thumb = models.ImageField(upload_to='./')
     product_id = models.ForeignKey(Product)
+    product_color = models.CharField('颜色', max_length=50, null=True, blank=True, default='')
+
 
     def __str__(self):
         return str(self.product_id)
+
 
 @python_2_unicode_compatible
 class ShopCar(models.Model):
     user = models.ForeignKey(User)
     product = models.ForeignKey(Product)
     count = models.IntegerField('数量', default=1)
-    price = models.IntegerField('价格', default=0)
+    attr = models.ManyToManyField(Product_attribut)
 
     def __str__(self):
         return str(self.product)
@@ -90,5 +110,28 @@ class Favirate(models.Model):
     def __str__(self):
         return self.id
 
-# @python_2_unicode_compatible
-# class Order(models.Model):
+@python_2_unicode_compatible
+class Status(models.Model):
+    status = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.status
+
+@python_2_unicode_compatible
+class Order(models.Model):
+    order_id = models.CharField(max_length=50)
+    user = models.ForeignKey(User)
+    status = models.ForeignKey(Status)
+
+    def __str__(self):
+        return self.order_id
+
+@python_2_unicode_compatible
+class Order_child(models.Model):
+    order = models.ForeignKey(Order)
+    product = models.CharField(max_length=100)
+    attr_values = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.order
+
